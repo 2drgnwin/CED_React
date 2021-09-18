@@ -10,17 +10,17 @@ class UpdateContents extends Component {
     };
     this.inputFormHandler = this.inputFormHandler.bind(this);
   }
-  inputFormHandler(e) {
+  inputFormHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
     // []안에 내용은 js 신규 문법임
-  }
+  };
 
   render() {
     return (
       <article>
         <h2>Update</h2>
         <form
-          onSubmit={function (e) {
+          onSubmit={(e) => {
             e.preventDefault();
             this.props.onSubmit(
               this.state.id,
@@ -29,7 +29,7 @@ class UpdateContents extends Component {
             );
             //e.target.title.value, e.target.desc.value);
             //debugger → e Object → title&desc(name) > value 값 확인
-          }.bind(this)}
+          }}
         >
           <input type="hidden" name="id" value={this.state.id}></input>
           <p>

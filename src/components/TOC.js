@@ -15,7 +15,7 @@ class TOC extends Component {
     for (i = 0; i < data.length; i++) {
       lists.push(
         <li>
-          <a
+          {/* <a
             href={'/content/' + data[i].id}
             onClick={function (id, e) {
               //상위 compo에 값 변경 → 상위 compo에 fu 심고 → click시 실행 →
@@ -25,17 +25,17 @@ class TOC extends Component {
             //bind의 data[i].id 인자가 function id 인자로 꽂힘 and you can use it
           >
             {data[i].title}
-          </a>
-          {/* <a
+          </a> */}
+          <a
             data-id={data[i].id}
             href={'/content/' + data[i].id}
-            onClick={function (e) {
+            onClick={(e) => {
               e.preventDefault();
               this.props.onChangePage(e.target.dataset.id);
-            }.bind(this)}
+            }}
           >
             {data[i].title}
-          </a> */}
+          </a>
         </li>
       );
     }

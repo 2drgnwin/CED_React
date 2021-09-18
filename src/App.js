@@ -25,7 +25,7 @@ class App extends Component {
     // UI에 영향을 주는게 아닌 정보기에 state 뺌
   }
 
-  getReadContents() {
+  getReadContents = () => {
     var i = 0;
     //for랑 filter로 바꿔보시오
     while (i < this.state.contents.length) {
@@ -38,9 +38,9 @@ class App extends Component {
       }
       i = i + 1;
     }
-  }
+  };
 
-  getContents() {
+  getContents = () => {
     var _title,
       _desc,
       _article = null;
@@ -56,7 +56,7 @@ class App extends Component {
     } else if (this.state.mode === 'create') {
       _article = (
         <CreateContents
-          onSubmit={function (_title, _desc) {
+          onSubmit={(_title, _desc) => {
             console.log(_title, _desc);
             this.max_content_id += 1;
             // this.state.contents.push({
@@ -78,7 +78,7 @@ class App extends Component {
             this.setState({
               contents: _contents,
             });
-          }.bind(this)}
+          }}
         ></CreateContents>
       );
     } else if (this.state.mode === 'update') {
@@ -86,7 +86,7 @@ class App extends Component {
       _article = (
         <UpdateContents
           data={_contents}
-          onSubmit={function (_id, _title, _desc) {
+          onSubmit={(_id, _title, _desc) => {
             var _contents = Array.from(this.state.contents);
             var i = 0;
             while (i < _contents.length) {
@@ -100,12 +100,12 @@ class App extends Component {
             this.setState({
               contents: _contents,
             });
-          }.bind(this)}
+          }}
         ></UpdateContents>
       );
     }
     return _article;
-  }
+  };
 
   render() {
     return (
@@ -113,25 +113,25 @@ class App extends Component {
         <Subject
           title={this.state.subject.title}
           sub={this.state.subject.sub}
-          onChangePage={function () {
+          onChangePage={() => {
             //하위 compo에서 state를 바꾸고 싶음 → evnet fn 호출
             this.setState({
               mode: 'welcome',
             });
-          }.bind(this)}
+          }}
         ></Subject>
         <TOC
-          onChangePage={function (id) {
+          onChangePage={(id) => {
             this.setState({
               mode: 'read',
               selected_contents_id: Number(id),
             });
-          }.bind(this)}
+          }}
           data={this.state.contents}
         ></TOC>
         {this.getContents()}
         <Control
-          onChangeMode={function (_mode) {
+          onChangeMode={(_mode) => {
             if (_mode === 'delete') {
               if (window.confirm('Are you sure?')) {
                 var _contents = Array.from(this.state.contents);
@@ -154,7 +154,7 @@ class App extends Component {
                 mode: _mode,
               });
             }
-          }.bind(this)}
+          }}
         ></Control>
       </div>
     );
